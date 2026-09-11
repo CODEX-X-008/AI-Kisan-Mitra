@@ -1,8 +1,8 @@
-streamlit==1.38.0
-google-generativeai==0.5.0
-pandas==2.2.2
-numpy==1.26.4
-pillow==10.4.0
-scikit-learn==1.5.1
-xgboost==2.1.1
-requests==2.32.3
+streamlit
+google-generativeai
+pandas
+numpy
+pillow
+scikit-learn
+xgboost
+requests
