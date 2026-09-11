@@ -1,25 +1,23 @@
 import streamlit as st
 import google.generativeai as genai
+from PIL import Image
 
-# Configure Gemini with your API key
 genai.configure(api_key="YOUR_API_KEY")
-
-# Use the vision model since you’re uploading images
 model = genai.GenerativeModel("gemini-pro-vision")
 
-st.title("AI Kisan Mitra")
+st.title("AI Kisan Mitra 🌱")
 
-uploaded_file = st.file_uploader("Upload a leaf image")
+uploaded_file = st.file_uploader("Upload a leaf image", type=["png", "jpg", "jpeg"])
 
 if uploaded_file:
-    st.image(uploaded_file, caption="Uploaded Crop Image")
+    image = Image.open(uploaded_file)
+    st.image(image, caption="Uploaded Crop Image")
 
     if st.button("Run Diagnosis"):
         with st.spinner("Running Gemini diagnosis..."):
             try:
-                # Pass both the text prompt and the uploaded image
                 response = model.generate_content(
-                    ["Diagnose crop disease from this image", uploaded_file]
+                    ["Diagnose crop disease from this image", image]
                 )
                 st.success("Diagnosis complete!")
                 st.write(response.text)
