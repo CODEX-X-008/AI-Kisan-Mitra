@@ -14,11 +14,13 @@ uploaded_file = st.file_uploader("Upload a leaf image", type=["png", "jpg", "jpe
 if uploaded_file:
     # Convert Streamlit UploadedFile → PIL.Image
     image = Image.open(uploaded_file)
+
     st.image(image, caption="Uploaded Crop Image")
 
     if st.button("Run Diagnosis"):
         with st.spinner("Running Gemini diagnosis..."):
             try:
+                # Pass the PIL image, not UploadedFile
                 response = model.generate_content(
                     ["Diagnose crop disease from this image", image]
                 )
